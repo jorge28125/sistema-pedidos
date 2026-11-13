@@ -8,6 +8,8 @@ Aplicación web de pedidos por QR con tres módulos conectados al mismo servidor
 
 El frontend está construido con React + Vite; el backend usa Node.js, Express y SQLite.
 
+[![Deploy to Render](https://render.com/images/deploy-to-render-button.svg)](https://render.com/deploy?repo=https://github.com/jorge28125/sistema-pedidos)
+
 ## 1. Abrir el proyecto en el computador
 
 Requisitos: Node.js 22.16 a 24.x y npm.
