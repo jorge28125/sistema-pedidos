@@ -1,0 +1,84 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "1. Instalar dependencias",
+      "detail": "Instala backend y frontend (solo la primera vez)",
+      "dependsOrder": "sequence",
+      "dependsOn": [
+        "Instalar API",
+        "Instalar Web"
+      ],
+      "problemMatcher": []
+    },
+    {
+      "label": "Instalar API",
+      "type": "shell",
+      "command": "npm install",
+      "options": {
+        "cwd": "server"
+      },
+      "problemMatcher": []
+    },
+    {
+      "label": "Instalar Web",
+      "type": "shell",
+      "command": "npm install",
+      "options": {
+        "cwd": "client"
+      },
+      "problemMatcher": []
+    },
+    {
+      "label": "2. Iniciar API",
+      "type": "shell",
+      "command": "npm start",
+      "options": {
+        "cwd": "server"
+      },
+      "isBackground": true,
+      "problemMatcher": []
+    },
+    {
+      "label": "3. Iniciar Web (modo desarrollo)",
+      "type": "shell",
+      "command": "npm run dev",
+      "options": {
+        "cwd": "client"
+      },
+      "isBackground": true,
+      "problemMatcher": []
+    },
+    {
+      "label": "Iniciar todo (API + Web)",
+      "detail": "Abre API en :3001 y Web en :5173",
+      "dependsOrder": "parallel",
+      "dependsOn": [
+        "2. Iniciar API",
+        "3. Iniciar Web (modo desarrollo)"
+      ],
+      "problemMatcher": []
+    },
+    {
+      "label": "Compilar Web",
+      "type": "shell",
+      "command": "npm run build",
+      "options": {
+        "cwd": "client"
+      },
+      "problemMatcher": []
+    },
+    {
+      "label": "Iniciar app compilada (un solo servidor)",
+      "detail": "Instala lo necesario, recompila React y arranca el servidor único.",
+      "type": "shell",
+      "command": "cmd",
+      "args": [
+        "/c",
+        "\"${workspaceFolder}\\iniciar.bat\""
+      ],
+      "isBackground": true,
+      "problemMatcher": []
+    }
+  ]
+}

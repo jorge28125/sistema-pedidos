@@ -1,0 +1,31 @@
+services:
+  - type: web
+    name: sistema-pedidos
+    runtime: node
+    # El plan gratuito no permite discos persistentes.
+    # La base SQLite vive en /tmp y se reinicia cuando el servicio se duerme o redespliega.
+    # Si necesitas conservar los datos, pasa a un plan pago y descomenta el bloque "disk".
+    plan: free
+    buildCommand: npm ci --prefix client && npm run build --prefix client && npm ci --prefix server
+    startCommand: cd server && npm start
+    healthCheckPath: /api/health
+    autoDeployTrigger: commit
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: NODE_VERSION
+        value: 24.22.1
+      - key: DB_PATH
+        value: /tmp/pedidos.sqlite
+      - key: ADMIN_EMAIL
+        sync: false
+      - key: ADMIN_PASSWORD
+        sync: false
+      - key: KITCHEN_EMAIL
+        sync: false
+      - key: KITCHEN_PASSWORD
+        sync: false
+    # disk:
+    #   name: pedidos-database
+    #   mountPath: /var/data
+    #   sizeGB: 1
