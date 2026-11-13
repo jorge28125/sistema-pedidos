@@ -44,7 +44,7 @@ export default function Login() {
   return (
     <div className="login-page">
       <aside className="login-aside">
-        <div className="home-brand"><BrandMark /> Pedidos U</div>
+        <div className="home-brand"><BrandMark /> CAFETERIA UCC</div>
         <div>
           <h2>Todo el servicio en una sola pantalla.</h2>
           <p>Entra para atender pedidos en cocina o revisar ventas e inventario.</p>

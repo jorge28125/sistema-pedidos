@@ -41,7 +41,7 @@ export default function Reportes() {
               <YAxis tick={{ fill: '#6f8a80', fontSize: 13 }} axisLine={false} tickLine={false} width={64} />
               <Tooltip cursor={{ fill: 'rgba(242,193,46,.2)' }} formatter={(v, n) => [n === 'total' ? fmt(v) : v, n === 'total' ? 'Ventas' : 'Pedidos']} />
               <Bar dataKey="total" name="total" radius={[8, 8, 0, 0]} onMouseEnter={(_, i) => setActivo(i)}>
-                {chartData.map((_, i) => <Cell key={i} fill={activo === null || activo === i ? '#12372f' : '#b7c6bd'} />)}
+                {chartData.map((_, i) => <Cell key={i} fill={activo === null || activo === i ? '#0b3c5d' : '#c3d6e2'} />)}
               </Bar>
             </BarChart>
           </ResponsiveContainer>

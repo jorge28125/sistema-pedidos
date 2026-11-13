@@ -86,11 +86,11 @@ export default function AdminLayout() {
     <div className="admin-layout">
       <div className="mobile-bar">
         <button onClick={() => setOpen(true)} aria-label="Abrir menú"><Icon name="menu" /></button>
-        Pedidos U
+        CAFETERIA UCC
       </div>
       <div className={`scrim ${open ? 'open' : ''}`} onClick={() => setOpen(false)} />
       <aside className={`admin-sidebar ${open ? 'open' : ''}`}>
-        <div className="brand"><BrandMark /> Pedidos U</div>
+        <div className="brand"><BrandMark /> CAFETERIA UCC</div>
         <nav className="nav-group" aria-label="Secciones">
           {items.map((it) => (
             <NavLink key={it.to} to={it.to} end={it.end}>

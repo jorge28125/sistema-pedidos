@@ -23,8 +23,8 @@ export default function Home() {
     <main className="home-page">
       <div className="home-inner">
         <header className="home-header">
-          <div className="home-brand"><BrandMark /> Pedidos U</div>
-          <span className="home-version">Cafetería universitaria</span>
+          <div className="home-brand"><BrandMark /> CAFETERIA UCC</div>
+          <span className="home-version">Cafetería UCC</span>
         </header>
 
         <section className="home-hero">
