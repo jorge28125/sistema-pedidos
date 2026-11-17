@@ -13,8 +13,12 @@ const emojiDe = (p) => EMOJI.find(([re]) => re.test(p.nombre))?.[1] || (p.catego
 
 export default function PublicMenu() {
   const [params] = useSearchParams();
-  const mesa = Number(params.get('mesa') || 1);
+  const mesaParam = params.get('mesa');
+  const mesa = Number(mesaParam || 1);
 
+  const [mesas, setMesas] = useState([]);
+  const [cargandoMesas, setCargandoMesas] = useState(false);
+  const [errorMesas, setErrorMesas] = useState('');
   const [productos, setProductos] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
@@ -28,12 +32,26 @@ export default function PublicMenu() {
   const [sheet, setSheet] = useState(false);
 
   useEffect(() => {
+    if (mesaParam) return;
+    setCargandoMesas(true);
+    setErrorMesas('');
+    api
+      .get('/api/mesas')
+      .then((res) => setMesas(res.mesas || []))
+      .catch((e) => setErrorMesas(e.message))
+      .finally(() => setCargandoMesas(false));
+  }, [mesaParam]);
+
+  useEffect(() => {
+    if (!mesaParam) return;
+    setLoading(true);
+    setError('');
     api
       .get(`/api/mesas/${mesa}/menu`)
       .then((res) => setProductos(res.productos || []))
       .catch((e) => setError(e.message))
       .finally(() => setLoading(false));
-  }, [mesa]);
+  }, [mesa, mesaParam]);
 
   const categorias = useMemo(() => ['Todo', ...new Set(productos.map((p) => p.categoria))], [productos]);
   const tonoDe = (c) => `tone-${Math.max(0, categorias.indexOf(c) - 1) % 4}`;
@@ -109,6 +127,39 @@ export default function PublicMenu() {
       setEnviando(false);
     }
   };
+
+  if (!mesaParam) {
+    return (
+      <main className="mesa-picker">
+        <header className="mesa-picker-header">
+          <span className="mesa-picker-eyebrow">CAFETERIA UCC</span>
+          <h1>¿En qué mesa estás?</h1>
+          <p>Elige tu mesa para abrir el menú y hacer tu pedido.</p>
+        </header>
+        <div className="mesa-picker-body">
+          {cargandoMesas && <p className="mesa-picker-note">Cargando mesas…</p>}
+          {errorMesas && (
+            <p className="form-error" role="alert">
+              No pudimos cargar las mesas. {errorMesas}
+            </p>
+          )}
+          {!cargandoMesas && !errorMesas && (
+            <div className="mesa-picker-grid">
+              {mesas.map((m) => (
+                <Link key={m.id} className="mesa-picker-card" to={`/pedido?mesa=${m.numero}`}>
+                  <span className="mesa-picker-num">{m.numero}</span>
+                  <span className="mesa-picker-label">Mesa {m.numero}</span>
+                </Link>
+              ))}
+            </div>
+          )}
+          <p className="mesa-picker-note">
+            Si tu mesa no aparece, pregunta al personal de la cafetería.
+          </p>
+        </div>
+      </main>
+    );
+  }
 
   if (codigo) {
     return (
