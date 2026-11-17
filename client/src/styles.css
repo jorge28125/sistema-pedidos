@@ -195,6 +195,13 @@ td.num, th.num { text-align: right; font-variant-numeric: tabular-nums; }
 .home-option-go { color: var(--sun); transition: transform .25s var(--ease); }
 .home-option:hover .home-option-go { transform: translateX(4px); }
 .home-note { color: #a9d0e6; font-size: 14px; margin: 22px 0 0; max-width: 520px; }
+.home-footer {
+  margin-top: clamp(36px, 7vh, 72px); padding-top: 18px;
+  border-top: 1px solid rgba(255, 255, 255, .14);
+  display: flex; flex-wrap: wrap; justify-content: space-between; align-items: baseline;
+  gap: 8px 24px; color: #a9d0e6; font-size: 13px;
+}
+.home-credits { color: #e4f3fc; font-weight: 600; }
 
 /* Comanda de portada */
 .demo-stage { display: grid; justify-items: center; gap: 16px; }

@@ -73,6 +73,13 @@ export default function Home() {
             </button>
           </div>
         </section>
+
+        <footer className="home-footer">
+          <span>Proyecto académico · CAFETERIA UCC</span>
+          <span className="home-credits">
+            Jorge Arroyo · Yiovany Torre · José Doria · Emmanuel Hoyos
+          </span>
+        </footer>
       </div>
     </main>
   );
